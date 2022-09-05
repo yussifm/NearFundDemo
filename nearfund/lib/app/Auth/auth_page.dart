@@ -1,11 +1,13 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nearfund/app/Auth/widgets/auth_btn.dart';
 import 'package:nearfund/app/Auth/widgets/div_or.dart';
 import 'package:nearfund/app/Auth/widgets/social_media_btn.dart';
 import 'package:nearfund/theme/colors.dart';
+import 'package:nearfund/widgets/customclip.dart';
 
 class AuthPage extends StatefulWidget {
   AuthPage({Key? key}) : super(key: key);
@@ -25,22 +27,26 @@ class _AuthPageState extends State<AuthPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              child: DefaultTextStyle(
-                style: const TextStyle(
-                  fontSize: 20.0,
-                ),
-                child: AnimatedTextKit(
-                  animatedTexts: [
-                    WavyAnimatedText('HI, Welcome',
-                        textStyle: TextStyle(
-                            fontFamily: GoogleFonts.pacifico().fontFamily)),
-                    WavyAnimatedText('NearFund',
-                        textStyle: TextStyle(
-                            fontFamily: GoogleFonts.pacifico().fontFamily,
-                            fontSize: 30)),
-                  ],
-                  isRepeatingAnimation: true,
+            ClipPath(
+              clipper: WaveClipperOne(),
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                child: DefaultTextStyle(
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                  ),
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      WavyAnimatedText('HI, Welcome',
+                          textStyle: TextStyle(
+                              fontFamily: GoogleFonts.pacifico().fontFamily)),
+                      WavyAnimatedText('NearFund',
+                          textStyle: TextStyle(
+                              fontFamily: GoogleFonts.pacifico().fontFamily,
+                              fontSize: 30)),
+                    ],
+                    isRepeatingAnimation: true,
+                  ),
                 ),
               ),
             ),
