@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nearfund">
+    package="com.CodedStudio.nearfund">
    <application
         android:label="nearfund"
         android:name="${applicationName}"
