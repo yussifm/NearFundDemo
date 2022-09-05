@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDH3S59ZjlCIcFysED64rvh6hIwCN3ifFA',
-    appId: '1:680998684754:android:ac16c8d1f1430f3f45778b',
+    appId: '1:680998684754:android:862126e2fcd9673545778b',
     messagingSenderId: '680998684754',
     projectId: 'nearfund-af6a7',
     storageBucket: 'nearfund-af6a7.appspot.com',
