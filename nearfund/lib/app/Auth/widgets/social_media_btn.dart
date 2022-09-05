@@ -28,7 +28,7 @@ class SocialMediaBtn extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(30),
               border:
                   Border.all(color: Colors.black.withOpacity(0.2), width: 1.5)),
           child: Row(

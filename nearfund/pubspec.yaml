@@ -60,6 +60,7 @@ dependencies:
   js: ^0.6.4
   animated_text_kit: ^4.2.2
   flutter_custom_clippers: ^2.0.0
+  flutter_neumorphic: ^3.2.0
 
 
 dev_dependencies:

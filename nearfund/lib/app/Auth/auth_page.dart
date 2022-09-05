@@ -22,69 +22,93 @@ class _AuthPageState extends State<AuthPage> {
     return Scaffold(
       backgroundColor: CustomColors.slitWhite,
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.only(top: 100.0, left: 16, right: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ClipPath(
-              clipper: WaveClipperOne(),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                child: DefaultTextStyle(
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                  ),
-                  child: AnimatedTextKit(
-                    animatedTexts: [
-                      WavyAnimatedText('HI, Welcome',
-                          textStyle: TextStyle(
-                              fontFamily: GoogleFonts.pacifico().fontFamily)),
-                      WavyAnimatedText('NearFund',
-                          textStyle: TextStyle(
-                              fontFamily: GoogleFonts.pacifico().fontFamily,
-                              fontSize: 30)),
-                    ],
-                    isRepeatingAnimation: true,
-                  ),
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(15),
+            margin: const EdgeInsets.only(top: 20),
+            height: MediaQuery.of(context).size.height / 5,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.amber[500],
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade600,
+                  offset: Offset(3.0, 4.0),
+                  blurRadius: 5.0,
+                  spreadRadius: 0.5,
+                ),
+                const BoxShadow(
+                  color: Colors.white,
+                  offset: Offset(-4.0, -4.0),
+                  blurRadius: 5.0,
+                  spreadRadius: 0.5,
+                ),
+              ],
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Colors.yellow.shade700, Colors.yellow.shade600],
+              ),
+            ),
+            child: Align(
+              alignment: Alignment.center,
+              child: DefaultTextStyle(
+                style: const TextStyle(
+                  fontSize: 20.0,
+                ),
+                child: AnimatedTextKit(
+                  animatedTexts: [
+                    WavyAnimatedText('NearFund',
+                        textStyle: TextStyle(
+                            fontFamily: GoogleFonts.walterTurncoat().fontFamily,
+                            fontSize: 25,
+                            color: Colors.black)),
+                  ],
+                  isRepeatingAnimation: true,
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            AuthBtn(
-              btnName: "Register",
-              onPress: () {},
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const AuthDivider(),
-            SocialMediaBtn(
-              btnName: "Register with Google",
-              btnIcon: FontAwesomeIcons.google,
-              onTapFunc: () {},
-              iconColor: Colors.black,
-            ),
-            SocialMediaBtn(
-              btnName: 'Register with FaceBook',
-              btnIcon: FontAwesomeIcons.facebook,
-              onTapFunc: () {},
-              iconColor: Colors.lightBlueAccent,
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              alignment: Alignment.bottomCenter,
-              height: 50,
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          AuthBtn(
+            btnName: "Register",
+            onPress: () {},
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const AuthDivider(),
+          SocialMediaBtn(
+            btnName: "Continue with Google",
+            btnIcon: FontAwesomeIcons.google,
+            onTapFunc: () {},
+            iconColor: Colors.black,
+          ),
+          SocialMediaBtn(
+            btnName: 'Continue with FaceBook',
+            btnIcon: FontAwesomeIcons.facebook,
+            onTapFunc: () {},
+            iconColor: Colors.blue,
+          ),
+          const SizedBox(height: 30),
+          Center(
+            child: Container(
+              alignment: Alignment.center,
               padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              margin: const EdgeInsets.only(
+                bottom: 10,
+                left: 30,
+                right: 10,
+              ),
               child: Row(
                 children: [
-                  const Text('Already have an account:?'),
+                  const Text('Already have an account?'),
                   GestureDetector(
                     onTap: () {},
                     child: const Text(
@@ -97,9 +121,9 @@ class _AuthPageState extends State<AuthPage> {
                   )
                 ],
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       )),
     );
   }
