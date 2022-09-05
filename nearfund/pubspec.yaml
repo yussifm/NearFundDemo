@@ -58,6 +58,7 @@ dependencies:
   google_fonts: ^3.0.1
   font_awesome_flutter: ^10.1.0
   js: ^0.6.4
+  animated_text_kit: ^4.2.2
 
 
 dev_dependencies:

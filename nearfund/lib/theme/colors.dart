@@ -7,4 +7,5 @@ class CustomColors {
   static const Color lightGrey = Color(0xFFE0E0E0);
   static const Color brown = Color(0xFF906352);
   static const Color black = Color(0xFF141414);
+  static const Color slitWhite = Color(0xFFFFFEF4);
 }

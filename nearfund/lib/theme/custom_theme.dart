@@ -5,7 +5,7 @@ import 'colors.dart';
 
 class CustomTheme extends ChangeNotifier {
   static bool _isDarkTheme = true;
-  ThemeMode get currentTheme => _isDarkTheme ? ThemeMode.dark : ThemeMode.light;
+  ThemeMode get currentTheme => _isDarkTheme ? ThemeMode.light : ThemeMode.dark;
 
   void toggleTheme() {
     _isDarkTheme = !_isDarkTheme;
