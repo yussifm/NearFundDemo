@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -62,22 +63,32 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
               children: [
                 const Align(
                     alignment: Alignment.center,
-                    child: Text("Complete your Page")),
+                    child: Text(
+                      "Complete your Page",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+                    )),
+                const SizedBox(
+                  height: 20,
+                ),
                 Column(
                   children: [
                     GestureDetector(
                       onTap: () {},
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: 50,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
+                      child: DottedBorder(
+                        padding: const EdgeInsets.all(24),
+                        color: Colors.black54,
+                        borderType: BorderType.Circle,
                         child: const FaIcon(FontAwesomeIcons.camera),
                       ),
                     ),
-                    const Text('Add a photo')
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const Text(
+                      'Add a photo',
+                      style: TextStyle(fontSize: 10),
+                    )
                   ],
                 )
               ],

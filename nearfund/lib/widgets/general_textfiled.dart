@@ -38,6 +38,7 @@ class _GeneralTextFelidFormWidgetState
     return Container(
       padding: const EdgeInsets.all(10),
       child: TextFormField(
+        style: const TextStyle(fontSize: 12),
         controller: widget.controller,
         obscureText: widget.obsecure,
         keyboardType: widget.Key_Type,
