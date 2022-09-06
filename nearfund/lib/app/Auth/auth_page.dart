@@ -33,7 +33,7 @@ class _AuthPageState extends State<AuthPage> {
             height: MediaQuery.of(context).size.height / 5,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.amber[500],
+              // color: Colors.amber[500],
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.shade600,
@@ -48,11 +48,11 @@ class _AuthPageState extends State<AuthPage> {
                   spreadRadius: 0.5,
                 ),
               ],
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Colors.yellow.shade700, Colors.yellow.shade600],
-              ),
+              // gradient: LinearGradient(
+              //   begin: Alignment.topLeft,
+              //   end: Alignment.bottomRight,
+              //   colors: [Colors.yellow.shade700, Colors.yellow.shade600],
+              // ),
             ),
             child: Align(
               alignment: Alignment.center,
@@ -64,7 +64,7 @@ class _AuthPageState extends State<AuthPage> {
                   animatedTexts: [
                     WavyAnimatedText('NearFund',
                         textStyle: TextStyle(
-                            fontFamily: GoogleFonts.walterTurncoat().fontFamily,
+                            fontFamily: GoogleFonts.homemadeApple().fontFamily,
                             fontSize: 25,
                             color: Colors.black)),
                   ],

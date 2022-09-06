@@ -73,7 +73,6 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
                         height: 50,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
-                          border: 
                         ),
                         child: const FaIcon(FontAwesomeIcons.camera),
                       ),

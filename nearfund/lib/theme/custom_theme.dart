@@ -16,7 +16,9 @@ class CustomTheme extends ChangeNotifier {
     //1
     return ThemeData(
         //2
+        primarySwatch: Colors.amber,
         primaryColor: Colors.yellow,
+        primaryColorLight: Colors.yellow,
         scaffoldBackgroundColor: Colors.white,
         fontFamily: 'Prompt',
         textTheme: ThemeData.light().textTheme.copyWith(

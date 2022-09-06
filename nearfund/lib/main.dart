@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nearfund/app/Auth/Register_page.dart';
 import 'package:nearfund/app/Auth/auth_page.dart';
+import 'package:nearfund/app/Auth/login_page.dart';
+import 'package:nearfund/app/UserDetils/userdetails_page.dart';
 import 'package:nearfund/firebase_options.dart';
 import 'package:nearfund/theme/config.dart';
 import 'package:nearfund/theme/custom_theme.dart';
@@ -18,18 +20,19 @@ Future<void> main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'NearFund Demo',
       debugShowCheckedModeBanner: false,
+
       theme: CustomTheme.lightTheme, //3
       darkTheme: CustomTheme.darkTheme, //4
       themeMode: currentTheme.currentTheme,
-      home: RegistPage(),
+      home: UserDetailsPage(),
     );
   }
 }

@@ -27,7 +27,7 @@ class AuthBtn extends StatelessWidget {
         onPress();
       },
       borderRadius: BorderRadius.circular(30),
-      splashColor: Colors.amber,
+      splashColor: Colors.amber[600],
       child: Container(
         width: width,
         height: hight,

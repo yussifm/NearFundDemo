@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nearfund/Utils/form_validator.dart';
@@ -38,54 +38,66 @@ class _LogInPageState extends ConsumerState<LogInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          IconButton(
-            onPressed: () {},
-            icon: const FaIcon(FontAwesomeIcons.chevronLeft),
-          ),
-          const Text("Welcome back"),
-          Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFelidFormWidget(
-                    hint_text: "Email",
-                    label_text: "Email",
-                    postIcon: Icons.email_rounded,
+        child: ListView(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: IconButton(
+                onPressed: () {},
+                icon: const FaIcon(FontAwesomeIcons.chevronLeft),
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            const Align(
+              alignment: Alignment.center,
+              child: Text(
+                "Welcome Back",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              ),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextFelidFormWidget(
+                      hint_text: "Email",
+                      label_text: "Email",
+                      postIcon: Icons.email_rounded,
+                      validator: (val) {
+                        if (!val!.isValidEmail) {
+                          return 'Enter valid email';
+                        }
+                        return null;
+                      },
+                      controller: _email_controller),
+                  TextFelidFormWidget(
+                    hint_text: "Password",
+                    label_text: "Enter password",
+                    postIcon: Icons.password_rounded,
+                    inputIcon: Icons.remove_red_eye,
                     validator: (val) {
-                      if (!val!.isValidEmail) {
-                        return 'Enter valid email';
-                      }
+                      if (!val!.isValidPassword) return 'Enter valid password';
                       return null;
                     },
-                    controller: _email_controller),
-                TextFelidFormWidget(
-                  hint_text: "Password",
-                  label_text: "Enter password",
-                  postIcon: Icons.password_rounded,
-                  inputIcon: Icons.remove_red_eye,
-                  validator: (val) {
-                    if (!val!.isValidPassword) return 'Enter valid password';
-                    return null;
-                  },
-                  controller: _password_controller,
-                  obsecure: true,
-                ),
-              ],
+                    controller: _password_controller,
+                    obsecure: true,
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          AuthBtn(
-            btnName: "LogIn",
-            onPress: () {},
-          )
-        ],
-      )),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 3,
+            ),
+            AuthBtn(btnName: "LogIn", onPress: () {}, width: 150)
+          ],
+        ),
+      ),
     );
     ;
   }
