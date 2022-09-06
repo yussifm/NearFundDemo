@@ -39,6 +39,7 @@ class _TextFelidFormWidgetState extends State<TextFelidFormWidget> {
         validator: widget.validator,
         inputFormatters: widget.inputFormatters,
         decoration: InputDecoration(
+          focusColor: Colors.yellow,
           hintText: widget.hint_text,
           labelText: widget.label_text,
           prefixIcon: Icon(widget.postIcon),

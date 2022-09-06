@@ -10,6 +10,7 @@ class AuthBtn extends StatelessWidget {
     this.elevat = 0.0,
     this.hight = 50,
     this.width = 50,
+    this.radius = 30,
   }) : super(key: key);
   final String btnName;
   final Function onPress;
@@ -17,6 +18,7 @@ class AuthBtn extends StatelessWidget {
   final double elevat;
   final double width;
   final double hight;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class AuthBtn extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30), color: Colors.yellow),
+            borderRadius: BorderRadius.circular(radius), color: Colors.yellow),
         child: isloading
             ? const CircularProgressIndicator.adaptive(
                 backgroundColor: Colors.brown,

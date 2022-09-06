@@ -16,7 +16,7 @@ class CustomTheme extends ChangeNotifier {
     //1
     return ThemeData(
         //2
-        primaryColor: CustomColors.yellowBrown,
+        primaryColor: Colors.yellow,
         scaffoldBackgroundColor: Colors.white,
         fontFamily: 'Prompt',
         textTheme: ThemeData.light().textTheme.copyWith(
@@ -79,7 +79,7 @@ class CustomTheme extends ChangeNotifier {
 
   static ThemeData get darkTheme {
     return ThemeData(
-        primaryColor: CustomColors.yellowBrown,
+        primaryColor: Colors.yellow,
         scaffoldBackgroundColor: Colors.black,
         fontFamily: 'Prompt',
         textTheme: ThemeData.dark().textTheme.copyWith(

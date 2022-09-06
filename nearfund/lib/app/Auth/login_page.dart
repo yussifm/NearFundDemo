@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nearfund/Utils/form_validator.dart';
+import 'package:nearfund/app/Auth/widgets/auth_btn.dart';
+import 'package:nearfund/app/Auth/widgets/auth_textfield.dart';
+
+class LogInPage extends ConsumerStatefulWidget {
+  LogInPage({Key? key}) : super(key: key);
+
+  @override
+  ConsumerState<LogInPage> createState() => _LogInPageState();
+}
+
+class _LogInPageState extends ConsumerState<LogInPage> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    final _email_controller = useTextEditingController();
+    final _password_controller = useTextEditingController();
+    return Scaffold(
+      body: SafeArea(
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          IconButton(
+            onPressed: () {},
+            icon: const FaIcon(FontAwesomeIcons.chevronLeft),
+          ),
+          const Text("Welcome back"),
+          Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFelidFormWidget(
+                    hint_text: "Email",
+                    label_text: "Email",
+                    postIcon: Icons.email_rounded,
+                    validator: (val) {
+                      if (!val!.isValidEmail) {
+                        return 'Enter valid email';
+                      }
+                      return null;
+                    },
+                    controller: _email_controller),
+                TextFelidFormWidget(
+                  hint_text: "Password",
+                  label_text: "Enter password",
+                  postIcon: Icons.password_rounded,
+                  inputIcon: Icons.remove_red_eye,
+                  validator: (val) {
+                    if (!val!.isValidPassword) return 'Enter valid password';
+                    return null;
+                  },
+                  controller: _password_controller,
+                  obsecure: true,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          AuthBtn(
+            btnName: "LogIn",
+            onPress: () {},
+          )
+        ],
+      )),
+    );
+    ;
+  }
+}
