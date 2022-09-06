@@ -48,6 +48,7 @@ class _GeneralTextFelidFormWidgetState
         decoration: InputDecoration(
           hintText: widget.hint_text,
           labelText: widget.label_text,
+          contentPadding: const EdgeInsets.symmetric(vertical: 5),
           border: OutlineInputBorder(
             borderRadius:
                 BorderRadius.all(Radius.circular(widget.borderRadius)),

@@ -157,8 +157,8 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
                 children: [
                   filedtextmethod(name: "Name"),
                   GeneralTextFelidFormWidget(
-                    hint_text: 'name',
-                    label_text: 'Yussif John',
+                    hint_text: 'Yussif John',
+                    label_text: 'Name',
                     validator: (val) {
                       if (!val!.isNotEmpty) return 'Enter valid name';
                       return null;
@@ -171,14 +171,14 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
                   ),
                   filedtextmethod(name: "About"),
                   GeneralTextFelidFormWidget(
-                    hint_text: 'About',
-                    label_text:
+                    hint_text:
                         'Enter your bio, tell your supporters why they should support you, Content creator or a Student',
+                    label_text: 'About',
                     controller: _about_controller,
                     max_lines: 5,
                     borderRadius: 20,
                     validator: (val) {
-                      if (!val!.isNotEmpty) return 'Enter valid name';
+                      if (!val!.isNotEmpty) return 'Enter bio';
                       return null;
                     },
                   ),
