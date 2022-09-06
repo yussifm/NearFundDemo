@@ -8,7 +8,6 @@ import 'package:nearfund/app/Auth/widgets/auth_textfield.dart';
 
 class RegistPage extends ConsumerStatefulWidget {
   RegistPage({Key? key}) : super(key: key);
-
   @override
   ConsumerState<RegistPage> createState() => _RegistPageState();
 }
@@ -16,10 +15,27 @@ class RegistPage extends ConsumerStatefulWidget {
 class _RegistPageState extends ConsumerState<RegistPage> {
   final _formKey = GlobalKey<FormState>();
 
+  late TextEditingController _email_controller;
+  late TextEditingController _password_controller;
+
+  @override
+  void initState() {
+    _email_controller = TextEditingController();
+    _password_controller = TextEditingController();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _email_controller.dispose();
+    _password_controller.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final _email_controller = useTextEditingController();
-    final _password_controller = useTextEditingController();
     return Scaffold(
       body: SafeArea(
           child: Column(
