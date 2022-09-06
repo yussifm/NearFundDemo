@@ -38,7 +38,7 @@ class _GeneralTextFelidFormWidgetState
     return Container(
       padding: const EdgeInsets.all(10),
       child: TextFormField(
-        style: const TextStyle(fontSize: 12),
+        style: const TextStyle(fontSize: 15),
         controller: widget.controller,
         obscureText: widget.obsecure,
         keyboardType: widget.Key_Type,
@@ -48,7 +48,8 @@ class _GeneralTextFelidFormWidgetState
         decoration: InputDecoration(
           hintText: widget.hint_text,
           labelText: widget.label_text,
-          contentPadding: const EdgeInsets.symmetric(vertical: 5),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
           border: OutlineInputBorder(
             borderRadius:
                 BorderRadius.all(Radius.circular(widget.borderRadius)),

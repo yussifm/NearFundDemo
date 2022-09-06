@@ -32,7 +32,7 @@ class MyApp extends ConsumerWidget {
       theme: CustomTheme.lightTheme, //3
       darkTheme: CustomTheme.darkTheme, //4
       themeMode: currentTheme.currentTheme,
-      home: UserDetailsPage(),
+      home: LogInPage(),
     );
   }
 }

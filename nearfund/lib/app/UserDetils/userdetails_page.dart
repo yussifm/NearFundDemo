@@ -46,57 +46,56 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: ListView(children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                onPressed: () {},
-                icon: const FaIcon(FontAwesomeIcons.chevronLeft),
+        child: ListView(children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              onPressed: () {},
+              icon: const FaIcon(FontAwesomeIcons.chevronLeft),
+            ),
+          ),
+          const SizedBox(height: 40),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Complete your Page",
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+                  )),
+              const SizedBox(
+                height: 20,
               ),
-            ),
-            const SizedBox(height: 40),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Complete your Page",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
-                    )),
-                const SizedBox(
-                  height: 20,
-                ),
-                Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: DottedBorder(
-                        padding: const EdgeInsets.all(24),
-                        color: Colors.black54,
-                        borderType: BorderType.Circle,
-                        child: const FaIcon(FontAwesomeIcons.camera),
-                      ),
+              Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: DottedBorder(
+                      padding: const EdgeInsets.all(24),
+                      color: Colors.black54,
+                      borderType: BorderType.Circle,
+                      child: const FaIcon(FontAwesomeIcons.camera),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const Text(
-                      'Add a photo',
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            Row(
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  const Text(
+                    'Add a photo',
+                    style: TextStyle(fontSize: 10),
+                  )
+                ],
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
               children: [
                 Expanded(
                   child: RadioListTile(
@@ -148,10 +147,13 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            Form(
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Form(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -194,12 +196,12 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            AuthBtn(btnName: 'Proceed', onPress: () {})
-          ]),
-        ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          AuthBtn(btnName: 'Proceed', onPress: () {})
+        ]),
       ),
     );
   }
@@ -209,7 +211,7 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
       alignment: Alignment.bottomLeft,
       child: Text(
         name,
-        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
       ),
     );
   }

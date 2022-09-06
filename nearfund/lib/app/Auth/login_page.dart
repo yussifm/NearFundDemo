@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nearfund/Utils/form_validator.dart';
+import 'package:nearfund/app/Auth/forgot_password.dart';
 import 'package:nearfund/app/Auth/widgets/auth_btn.dart';
 import 'package:nearfund/app/Auth/widgets/auth_textfield.dart';
 
@@ -88,6 +90,20 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                     controller: _password_controller,
                     obsecure: true,
                   ),
+                  Container(
+                    alignment: Alignment.bottomRight,
+                    margin: const EdgeInsets.only(right: 25),
+                    child: TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: ((context) => ForgotPasswordPage())));
+                        },
+                        child: const Text(
+                          'Forgot password?',
+                          style:
+                              TextStyle(decoration: TextDecoration.underline),
+                        )),
+                  )
                 ],
               ),
             ),

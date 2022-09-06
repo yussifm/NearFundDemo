@@ -41,6 +41,8 @@ class _TextFelidFormWidgetState extends State<TextFelidFormWidget> {
         decoration: InputDecoration(
           focusColor: Colors.yellow,
           hintText: widget.hint_text,
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
           labelText: widget.label_text,
           prefixIcon: Icon(widget.postIcon),
           suffixIcon: IconButton(
