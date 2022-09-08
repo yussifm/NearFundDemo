@@ -11,10 +11,10 @@ class _HomePageState extends State<HomePage> {
   List TabNavPages = [];
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-          child: Text('Home'),
+          child: Column(),
         ));
   }
 }
