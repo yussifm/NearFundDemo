@@ -12,19 +12,19 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 4,
       child: Column(children: [
         Text('sep 16, 2022'),
         Text('title'),
         Text('desc'),
-        Row(children: [
-
-
-
-          FaIcon(FontAwesomeIcons.heart),
-          Text('10000000')
-          FaIcon(FontAwesomeIcons.message),
-          FaIcon(FontAwesomeIcons.share)
-        ],)
+        Row(
+          children: [
+            FaIcon(FontAwesomeIcons.heart),
+            Text('10000000'),
+            FaIcon(FontAwesomeIcons.message),
+            FaIcon(FontAwesomeIcons.share)
+          ],
+        )
       ]),
     );
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Post/widget/post_card.dart';
+
 class HomeFeed extends StatefulWidget {
   HomeFeed({Key? key}) : super(key: key);
 
@@ -14,9 +16,7 @@ class _HomeFeedState extends State<HomeFeed> {
         body: ListView.builder(
             itemCount: 120,
             itemBuilder: (context, index) {
-              return Card(
-                child: Text('Card$index'),
-              );
+              return PostCard();
             }));
   }
 }
