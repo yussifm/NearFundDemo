@@ -36,7 +36,7 @@ class _MainAppPageState extends State<MainAppPage> {
           borderRadius: 30,
           itemBorderRadius: 30,
           fontSize: 10,
-          margin: const EdgeInsets.only(bottom: 20, left: 15, right: 15),
+          margin: const EdgeInsets.only(top: 5,bottom: 20, left: 15, right: 15),
           padding: const EdgeInsets.all(10),
           items: [
             FloatingNavbarItem(icon: Icons.dashboard_rounded, title: 'Home'),
