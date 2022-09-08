@@ -14,7 +14,34 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-          child: Column(),
+          child: Column(
+            children: [
+              Container(
+                  child: Text(
+                'Discover',
+                style: TextStyle(),
+              )),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                child: TabBar(
+                  tabs: [
+                    Tab(
+                      text: 'Feed',
+                    ),
+                    Tab(text: 'Creators'),
+                    Tab(
+                      text: 'Student',
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                child: TabBarView(children: TabNavPages[0]),
+              )
+            ],
+          ),
         ));
   }
 }
