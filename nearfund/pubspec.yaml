@@ -63,6 +63,7 @@ dependencies:
   flutter_neumorphic: ^3.2.0
   dotted_border: ^2.0.0+2
   rounded_tabbar_widget: ^0.0.2
+  floating_bottom_navigation_bar: ^1.5.2
 
 
 dev_dependencies:

@@ -8,11 +8,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List TabNavPages = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        bottomNavigationBar: BottomNavigationBar(items: []),
         body: SafeArea(
-      child: Container(),
-    ));
+          child: TabBar(tabs: []),
+        ));
   }
 }

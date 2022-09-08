@@ -6,6 +6,7 @@ import 'package:nearfund/app/Auth/Register_page.dart';
 import 'package:nearfund/app/Auth/auth_page.dart';
 import 'package:nearfund/app/Auth/login_page.dart';
 import 'package:nearfund/app/UserDetils/userdetails_page.dart';
+import 'package:nearfund/app/mainPage/main_page.dart';
 import 'package:nearfund/firebase_options.dart';
 import 'package:nearfund/theme/config.dart';
 import 'package:nearfund/theme/custom_theme.dart';
@@ -32,7 +33,7 @@ class MyApp extends ConsumerWidget {
       theme: CustomTheme.lightTheme, //3
       darkTheme: CustomTheme.darkTheme, //4
       themeMode: currentTheme.currentTheme,
-      home: LogInPage(),
+      home: MainAppPage(),
     );
   }
 }
