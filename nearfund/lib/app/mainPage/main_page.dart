@@ -27,14 +27,14 @@ class _MainAppPageState extends State<MainAppPage> {
     return Scaffold(
         backgroundColor: Colors.white,
         bottomNavigationBar: FloatingNavbar(
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.black,
           selectedBackgroundColor: Colors.amber[200],
           currentIndex: currentBottNavpostition,
           selectedItemColor: Colors.black87,
-          unselectedItemColor: Colors.white.withOpacity(0.8),
+          unselectedItemColor: Colors.white,
           iconSize: 30,
-          borderRadius: 20,
-          itemBorderRadius: 20,
+          borderRadius: 30,
+          itemBorderRadius: 30,
           fontSize: 10,
           margin: const EdgeInsets.only(bottom: 20, left: 15, right: 15),
           padding: const EdgeInsets.all(10),
