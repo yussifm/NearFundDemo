@@ -14,7 +14,7 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellowAccent[200],
+      backgroundColor: Colors.amber[200],
       body: Center(
         widthFactor: MediaQuery.of(context).size.width,
         heightFactor: MediaQuery.of(context).size.height,
@@ -24,11 +24,12 @@ class _LoadingPageState extends State<LoadingPage> {
           children: const [
             SpinKitDancingSquare(
               color: CustomColors.darkGreenPurple,
-              size: 40,
+              size: 100,
             ),
             Text(
               "processing ..",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
             ),
           ],
         ),

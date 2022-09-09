@@ -6,8 +6,10 @@ import 'package:nearfund/app/Auth/Register_page.dart';
 import 'package:nearfund/app/Auth/auth_page.dart';
 import 'package:nearfund/app/Auth/login_page.dart';
 import 'package:nearfund/app/UserDetils/userdetails_page.dart';
+import 'package:nearfund/app/loading/loading_page.dart';
 import 'package:nearfund/app/mainPage/main_page.dart';
 import 'package:nearfund/firebase_options.dart';
+import 'package:nearfund/services/authService.dart';
 import 'package:nearfund/theme/config.dart';
 import 'package:nearfund/theme/custom_theme.dart';
 
@@ -26,6 +28,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final checkAutState = ref.watch(authServiceProvide).getCurrentUser();
     return MaterialApp(
       title: 'NearFund Demo',
       debugShowCheckedModeBanner: false,
@@ -33,7 +36,7 @@ class MyApp extends ConsumerWidget {
       theme: CustomTheme.lightTheme, //3
       darkTheme: CustomTheme.darkTheme, //4
       themeMode: currentTheme.currentTheme,
-      home: MainAppPage(),
+      home: checkAutState != null ? MainAppPage() : AuthPage(),
     );
   }
 }

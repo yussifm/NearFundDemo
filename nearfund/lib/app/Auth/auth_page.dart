@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nearfund/app/Auth/Register_page.dart';
+import 'package:nearfund/app/Auth/login_page.dart';
 import 'package:nearfund/app/Auth/widgets/auth_btn.dart';
 import 'package:nearfund/app/Auth/widgets/div_or.dart';
 import 'package:nearfund/app/Auth/widgets/social_media_btn.dart';
@@ -36,7 +38,7 @@ class _AuthPageState extends State<AuthPage> {
               // color: Colors.amber[500],
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.shade600,
+                  color: Colors.grey.shade200,
                   offset: Offset(3.0, 4.0),
                   blurRadius: 5.0,
                   spreadRadius: 0.5,
@@ -64,7 +66,7 @@ class _AuthPageState extends State<AuthPage> {
                   animatedTexts: [
                     WavyAnimatedText('NearFund',
                         textStyle: TextStyle(
-                            fontFamily: GoogleFonts.homemadeApple().fontFamily,
+                            fontFamily: GoogleFonts.pacifico().fontFamily,
                             fontSize: 25,
                             color: Colors.black)),
                   ],
@@ -78,7 +80,10 @@ class _AuthPageState extends State<AuthPage> {
           ),
           AuthBtn(
             btnName: "Register",
-            onPress: () {},
+            onPress: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: ((context) => RegistPage())));
+            },
           ),
           const SizedBox(
             height: 20,
@@ -110,7 +115,10 @@ class _AuthPageState extends State<AuthPage> {
                 children: [
                   const Text('Already have an account?'),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: ((context) => LogInPage())));
+                    },
                     child: const Text(
                       'Login',
                       style: TextStyle(
