@@ -41,6 +41,7 @@ class _HomePageState extends ConsumerState<HomePage>
           title: Text(
             'NearFund',
             style: TextStyle(
+              fontSize: 20,
               fontFamily: GoogleFonts.pacifico().fontFamily,
             ),
           ),
