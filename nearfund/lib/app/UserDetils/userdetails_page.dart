@@ -11,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:nearfund/Utils/form_validator.dart';
 import 'package:nearfund/app/Auth/Register_page.dart';
 import 'package:nearfund/app/Auth/widgets/auth_btn.dart';
+import 'package:nearfund/app/loading/loading_page.dart';
 import 'package:nearfund/app/mainPage/main_page.dart';
 import 'package:nearfund/models/user_model.dart';
 import 'package:nearfund/services/fileStorage_service.dart';
@@ -38,7 +39,7 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
   UserType? userType = UserType.content;
   bool _loading = false;
   bool imgLoading = false;
-  String imgUrl = '';
+  String? imgUrl = null;
   ImagePicker _picker = ImagePicker();
   XFile? selectedImg = null;
   @override
@@ -86,7 +87,7 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
                     uId: autState.getCurrentUser()!.uid,
                     name: _name_controller.text,
                     about: _about_controller.text,
-                    imgUrl: imgUrl,
+                    imgUrl: imgUrl.toString(),
                     userType: userType,
                     userLink: _link_controller.text,
                     contact: _phone_controller.text,
@@ -116,214 +117,227 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
     final autState = ref.watch(authServiceProvide);
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: ListView(children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: ((context) => RegistPage())));
-              },
-              icon: const FaIcon(FontAwesomeIcons.chevronLeft),
-            ),
-          ),
-          const SizedBox(height: 40),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Complete your Page",
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
-                  )),
-              const SizedBox(
-                height: 20,
-              ),
-              Column(
-                children: [
-                  GestureDetector(
-                    onTap: () async {
-                      selectedImg =
-                          await _picker.pickImage(source: ImageSource.gallery);
-                      String userId = autState.getCurrentUser()!.uid;
-                      if (selectedImg != null) {
+      body: _loading
+          ? LoadingPage()
+          : SafeArea(
+              child: ListView(children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: ((context) => RegistPage())));
+                    },
+                    icon: const FaIcon(FontAwesomeIcons.chevronLeft),
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Complete your Page",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 15),
+                        )),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            selectedImg = await _picker.pickImage(
+                                source: ImageSource.gallery);
+                            String userId = autState.getCurrentUser()!.uid;
+                            if (selectedImg != null) {
+                              setState(() {
+                                imgLoading = true;
+                              });
+                              String getImgUrl =
+                                  await fileUploadState.uploadFiles(
+                                      file: File(selectedImg!.path),
+                                      pathName: "images/user$userId.png");
+                              setState(() {
+                                imgUrl = getImgUrl;
+                                imgLoading = false;
+                              });
+                            }
+                          },
+                          child: DottedBorder(
+                            padding: const EdgeInsets.all(24),
+                            color: Colors.black54,
+                            borderType: BorderType.Circle,
+                            child: imgLoading
+                                ? const CircularProgressIndicator.adaptive()
+                                : imgUrl != null
+                                    ? Image(
+                                        image: NetworkImage(
+                                          imgUrl.toString(),
+                                        ),
+                                        filterQuality: FilterQuality.low,
+                                        fit: BoxFit.contain,
+                                      )
+                                    : const FaIcon(FontAwesomeIcons.camera),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        const Text(
+                          'Add a photo',
+                          style: TextStyle(fontSize: 10),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: RadioListTile(
+                          value: UserType.content,
+                          groupValue: userType,
+                          onChanged: ((UserType? value) {
+                            setState(() {
+                              userType = value;
+                            });
+                          }),
+                          title: Text(
+                            "Content Creator".toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 8,
+                              fontWeight: userType == UserType.content
+                                  ? FontWeight.w800
+                                  : FontWeight.normal,
+                              color: userType == UserType.content
+                                  ? Colors.amber[900]
+                                  : Colors.black,
+                            ),
+                          ),
+                          activeColor: Colors.amber.shade900,
+                        ),
+                      ),
+                      Expanded(
+                        child: RadioListTile(
+                          value: UserType.student,
+                          groupValue: userType,
+                          onChanged: ((UserType? value) {
+                            setState(() {
+                              userType = value;
+                            });
+                          }),
+                          title: Text(
+                            "Student".toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 8,
+                              fontWeight: userType == UserType.student
+                                  ? FontWeight.w800
+                                  : FontWeight.normal,
+                              color: userType == UserType.student
+                                  ? Colors.amber[900]
+                                  : Colors.black,
+                            ),
+                          ),
+                          activeColor: Colors.amber.shade900,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Form(
+                    key: _userformKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        filedtextmethod(name: "Name"),
+                        GeneralTextFelidFormWidget(
+                          hint_text: 'Yussif John',
+                          label_text: 'Name',
+                          validator: (val) {
+                            if (!val!.isNotEmpty) return 'Enter valid name';
+                            return null;
+                          },
+                          controller: _name_controller,
+                          borderRadius: 20,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        filedtextmethod(name: "Contact/Momo number"),
+                        GeneralTextFelidFormWidget(
+                          hint_text: '+2330540000000',
+                          label_text: 'Phone',
+                          validator: (val) {
+                            if (!val!.isValidPhone)
+                              return 'Enter valid phone number';
+                            return null;
+                          },
+                          controller: _phone_controller,
+                          borderRadius: 20,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        filedtextmethod(name: "About"),
+                        GeneralTextFelidFormWidget(
+                          hint_text:
+                              'Enter your bio, tell your supporters why they should support you, Content creator or a Student',
+                          label_text: 'About',
+                          controller: _about_controller,
+                          max_lines: 5,
+                          borderRadius: 20,
+                          validator: (val) {
+                            if (!val!.isNotEmpty) return 'Enter bio';
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        filedtextmethod(name: "Website or Social link"),
+                        GeneralTextFelidFormWidget(
+                            hint_text: 'https://',
+                            label_text: 'https://',
+                            borderRadius: 20,
+                            controller: _link_controller),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                AuthBtn(
+                    btnName: 'Proceed',
+                    onPress: () async {
+                      String usertype = 'Creator';
+                      if (userType == UserType.student) {
                         setState(() {
-                          imgLoading = true;
+                          usertype = 'Student';
                         });
-                        String getImgUrl = await fileUploadState.uploadFiles(
-                            file: File(selectedImg!.path),
-                            pathName: "images/user$userId.png");
+                      } else {
                         setState(() {
-                          imgUrl = getImgUrl;
-                          imgLoading = false;
+                          usertype = 'Creator';
                         });
                       }
-                    },
-                    child: DottedBorder(
-                      padding: const EdgeInsets.all(24),
-                      color: Colors.black54,
-                      borderType: BorderType.Circle,
-                      child: imgLoading
-                          ? const CircularProgressIndicator.adaptive()
-                          : const FaIcon(FontAwesomeIcons.camera),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Text(
-                    'Add a photo',
-                    style: TextStyle(fontSize: 10),
-                  )
-                ],
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: RadioListTile(
-                    value: UserType.content,
-                    groupValue: userType,
-                    onChanged: ((UserType? value) {
-                      setState(() {
-                        userType = value;
-                      });
-                    }),
-                    title: Text(
-                      "Content Creator".toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 8,
-                        fontWeight: userType == UserType.content
-                            ? FontWeight.w800
-                            : FontWeight.normal,
-                        color: userType == UserType.content
-                            ? Colors.amber[900]
-                            : Colors.black,
-                      ),
-                    ),
-                    activeColor: Colors.amber.shade900,
-                  ),
-                ),
-                Expanded(
-                  child: RadioListTile(
-                    value: UserType.student,
-                    groupValue: userType,
-                    onChanged: ((UserType? value) {
-                      setState(() {
-                        userType = value;
-                      });
-                    }),
-                    title: Text(
-                      "Student".toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 8,
-                        fontWeight: userType == UserType.student
-                            ? FontWeight.w800
-                            : FontWeight.normal,
-                        color: userType == UserType.student
-                            ? Colors.amber[900]
-                            : Colors.black,
-                      ),
-                    ),
-                    activeColor: Colors.amber.shade900,
-                  ),
-                ),
-              ],
+                      await validatedAndSubmit(ref: ref, userType: usertype);
+                    })
+              ]),
             ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Form(
-              key: _userformKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  filedtextmethod(name: "Name"),
-                  GeneralTextFelidFormWidget(
-                    hint_text: 'Yussif John',
-                    label_text: 'Name',
-                    validator: (val) {
-                      if (!val!.isNotEmpty) return 'Enter valid name';
-                      return null;
-                    },
-                    controller: _name_controller,
-                    borderRadius: 20,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  filedtextmethod(name: "Contact/Momo number"),
-                  GeneralTextFelidFormWidget(
-                    hint_text: '+2330540000000',
-                    label_text: 'Phone',
-                    validator: (val) {
-                      if (!val!.isValidPhone) return 'Enter valid phone number';
-                      return null;
-                    },
-                    controller: _phone_controller,
-                    borderRadius: 20,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  filedtextmethod(name: "About"),
-                  GeneralTextFelidFormWidget(
-                    hint_text:
-                        'Enter your bio, tell your supporters why they should support you, Content creator or a Student',
-                    label_text: 'About',
-                    controller: _about_controller,
-                    max_lines: 5,
-                    borderRadius: 20,
-                    validator: (val) {
-                      if (!val!.isNotEmpty) return 'Enter bio';
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  filedtextmethod(name: "Website or Social link"),
-                  GeneralTextFelidFormWidget(
-                      hint_text: 'https://',
-                      label_text: 'https://',
-                      borderRadius: 20,
-                      controller: _link_controller),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          AuthBtn(
-              btnName: 'Proceed',
-              onPress: () async {
-                String usertype = 'Creator';
-                if (userType == UserType.student) {
-                  setState(() {
-                    usertype = 'Student';
-                  });
-                } else {
-                  setState(() {
-                    usertype = 'Creator';
-                  });
-                }
-                await validatedAndSubmit(ref: ref, userType: usertype);
-              })
-        ]),
-      ),
     );
   }
 
