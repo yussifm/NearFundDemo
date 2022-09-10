@@ -1,3 +1,4 @@
+import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -50,13 +51,13 @@ class _HomePageState extends ConsumerState<HomePage>
           bottom: TabBar(
             controller: tabcontroller,
             isScrollable: true,
-            indicator: const UnderlineTabIndicator(
-              borderSide: BorderSide(
-                width: 2.0,
-                color: Colors.amber,
-              ),
-              insets: EdgeInsets.symmetric(horizontal: 20.0),
-            ),
+            indicator: const BubbleTabIndicator(
+                indicatorHeight: 25.0,
+                indicatorColor: Colors.amberAccent,
+                tabBarIndicatorSize: TabBarIndicatorSize.tab,
+                indicatorRadius: 15,
+                insets: EdgeInsets.all(1),
+                padding: EdgeInsets.all(10)),
             unselectedLabelColor: Colors.grey,
             onTap: (value) {},
             tabs: const [

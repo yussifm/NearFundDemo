@@ -32,7 +32,7 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
   final _userformKey = GlobalKey<FormState>();
   UserType? userType = UserType.content;
   bool _loading = false;
-
+  final String imgUrl = '';
   @override
   void initState() {
     _about_controller = TextEditingController();

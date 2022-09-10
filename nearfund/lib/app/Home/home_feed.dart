@@ -13,7 +13,7 @@ class _HomeFeedState extends State<HomeFeed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey.withOpacity(0.3),
+        backgroundColor: Colors.grey.withOpacity(0.2),
         body: ListView.builder(
             itemCount: 120,
             itemBuilder: (context, index) {
