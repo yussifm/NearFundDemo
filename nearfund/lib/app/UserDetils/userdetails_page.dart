@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +9,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nearfund/Utils/form_validator.dart';
+import 'package:nearfund/app/Auth/Register_page.dart';
 import 'package:nearfund/app/Auth/widgets/auth_btn.dart';
 import 'package:nearfund/app/mainPage/main_page.dart';
 import 'package:nearfund/models/user_model.dart';
+import 'package:nearfund/services/fileStorage_service.dart';
 import 'package:nearfund/theme/colors.dart';
 import 'package:nearfund/widgets/general_textfiled.dart';
 
@@ -33,8 +37,10 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
   final _userformKey = GlobalKey<FormState>();
   UserType? userType = UserType.content;
   bool _loading = false;
-  final String imgUrl = '';
-  final ImagePicker _picker = ImagePicker();
+  bool imgLoading = false;
+  String imgUrl = '';
+  ImagePicker _picker = ImagePicker();
+  XFile? selectedImg = null;
   @override
   void initState() {
     _about_controller = TextEditingController();
@@ -62,7 +68,10 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
     return false;
   }
 
-  validatedAndSubmit({required WidgetRef ref, required String userType}) async {
+  validatedAndSubmit({
+    required WidgetRef ref,
+    required String userType,
+  }) async {
     final autState = ref.watch(authServiceProvide);
     final userState = ref.watch(userServiceProvide);
 
@@ -77,7 +86,7 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
                     uId: autState.getCurrentUser()!.uid,
                     name: _name_controller.text,
                     about: _about_controller.text,
-                    imgUrl: '',
+                    imgUrl: imgUrl,
                     userType: userType,
                     userLink: _link_controller.text,
                     contact: _phone_controller.text,
@@ -103,6 +112,8 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final fileUploadState = ref.watch(fileStorageServiceProvide);
+    final autState = ref.watch(authServiceProvide);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -110,7 +121,10 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
           Align(
             alignment: Alignment.topLeft,
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: ((context) => RegistPage())));
+              },
               icon: const FaIcon(FontAwesomeIcons.chevronLeft),
             ),
           ),
@@ -131,12 +145,30 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () async {
+                      selectedImg =
+                          await _picker.pickImage(source: ImageSource.gallery);
+                      String userId = autState.getCurrentUser()!.uid;
+                      if (selectedImg != null) {
+                        setState(() {
+                          imgLoading = true;
+                        });
+                        String getImgUrl = await fileUploadState.uploadFiles(
+                            file: File(selectedImg!.path),
+                            pathName: "images/user$userId.png");
+                        setState(() {
+                          imgUrl = getImgUrl;
+                          imgLoading = false;
+                        });
+                      }
+                    },
                     child: DottedBorder(
                       padding: const EdgeInsets.all(24),
                       color: Colors.black54,
                       borderType: BorderType.Circle,
-                      child: const FaIcon(FontAwesomeIcons.camera),
+                      child: imgLoading
+                          ? const CircularProgressIndicator.adaptive()
+                          : const FaIcon(FontAwesomeIcons.camera),
                     ),
                   ),
                   const SizedBox(
@@ -275,7 +307,7 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
           const SizedBox(
             height: 20,
           ),
-          AuthBtn(btnName: 'Proceed', onPress: () {})
+          AuthBtn(btnName: 'Proceed', onPress: () async {})
         ]),
       ),
     );
