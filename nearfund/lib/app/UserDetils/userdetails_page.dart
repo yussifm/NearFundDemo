@@ -5,6 +5,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:nearfund/Utils/form_validator.dart';
 import 'package:nearfund/app/Auth/widgets/auth_btn.dart';
 import 'package:nearfund/app/mainPage/main_page.dart';
@@ -33,6 +34,7 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
   UserType? userType = UserType.content;
   bool _loading = false;
   final String imgUrl = '';
+  final ImagePicker _picker = ImagePicker();
   @override
   void initState() {
     _about_controller = TextEditingController();
