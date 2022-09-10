@@ -61,8 +61,8 @@ class _RegistPageState extends ConsumerState<RegistPage> {
                 email: _email_controller.text,
                 password: _password_controller.text)
             .then((value) async {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => UserDetailsPage()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => UserDetailsPage()));
         });
 
         setState(() {
@@ -130,8 +130,9 @@ class _RegistPageState extends ConsumerState<RegistPage> {
                           postIcon: Icons.password_rounded,
                           inputIcon: Icons.remove_red_eye,
                           validator: (val) {
-                            if (!val!.isValidPassword)
+                            if (!val!.isValidPassword) {
                               return 'Enter valid password';
+                            }
                             return null;
                           },
                           controller: _password_controller,
@@ -143,7 +144,12 @@ class _RegistPageState extends ConsumerState<RegistPage> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 3,
                   ),
-                  AuthBtn(btnName: "Continue", onPress: () {}, width: 150)
+                  AuthBtn(
+                      btnName: "Continue",
+                      onPress: () async {
+                        await validatedAndSubmit(ref: ref);
+                      },
+                      width: 150)
                 ],
               ),
             ),
