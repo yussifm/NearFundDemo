@@ -299,7 +299,7 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
                       hint_text: 'https://',
                       label_text: 'https://',
                       borderRadius: 20,
-                      controller: _name_controller),
+                      controller: _link_controller),
                 ],
               ),
             ),
@@ -307,7 +307,21 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
           const SizedBox(
             height: 20,
           ),
-          AuthBtn(btnName: 'Proceed', onPress: () async {})
+          AuthBtn(
+              btnName: 'Proceed',
+              onPress: () async {
+                String usertype = 'Creator';
+                if (userType == UserType.student) {
+                  setState(() {
+                    usertype = 'Student';
+                  });
+                } else {
+                  setState(() {
+                    usertype = 'Creator';
+                  });
+                }
+                await validatedAndSubmit(ref: ref, userType: usertype);
+              })
         ]),
       ),
     );
