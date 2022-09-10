@@ -180,6 +180,8 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
                                         ),
                                         filterQuality: FilterQuality.low,
                                         fit: BoxFit.contain,
+                                        width: 40,
+                                        height: 40,
                                       )
                                     : const FaIcon(FontAwesomeIcons.camera),
                           ),
