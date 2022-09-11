@@ -15,7 +15,7 @@ class _HomeFeedState extends State<HomeFeed> {
     return Scaffold(
         backgroundColor: Colors.grey.withOpacity(0.2),
         body: ListView.builder(
-            itemCount: 120,
+            itemCount: 20,
             itemBuilder: (context, index) {
               return PostCard();
             }));

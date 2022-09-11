@@ -16,14 +16,6 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<HomePage>
     with TickerProviderStateMixin {
-  int currentTapPage = 0;
-
-  void ontap(val) {
-    setState(() {
-      currentTapPage = val;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
@@ -50,8 +42,14 @@ class _HomePageState extends ConsumerState<HomePage>
           elevation: 0,
           actions: [
             Container(
+              height: 40,
+              width: 40,
+              margin: const EdgeInsets.only(right: 10),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle, color: Colors.grey.withOpacity(0.3)),
               child: IconButton(
-                icon: Icon(Icons.search_rounded),
+                icon: const Icon(Icons.search_rounded),
                 onPressed: () {},
               ),
             )

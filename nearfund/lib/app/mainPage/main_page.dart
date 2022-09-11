@@ -50,16 +50,16 @@ class _MainAppPageState extends State<MainAppPage> {
             FloatingNavbarItem(icon: Icons.dashboard_rounded, title: 'Home'),
             FloatingNavbarItem(icon: Icons.add_box_rounded, title: 'Post'),
             FloatingNavbarItem(
-              customWidget: Badge(
-                  badgeContent: const Text('3'),
-                  badgeColor: Colors.blueAccent,
-                  showBadge: false,
-                  child: const Icon(
-                    Icons.message_rounded,
-                    color: Colors.white,
-                    size: 33,
-                  )),
-            ),
+                customWidget: Badge(
+                    badgeContent: const Text('3'),
+                    badgeColor: Colors.blueAccent,
+                    showBadge: true,
+                    child: const Icon(
+                      Icons.message_rounded,
+                      color: Colors.white,
+                      size: 30,
+                    )),
+                title: 'chat'),
             FloatingNavbarItem(icon: Icons.person, title: 'My Page'),
           ],
           onTap: (int val) {
