@@ -52,8 +52,12 @@ class _MainAppPageState extends State<MainAppPage> {
             FloatingNavbarItem(
               customWidget: Badge(
                   badgeContent: const Text('3'),
+                  badgeColor: Colors.blueAccent,
+                  showBadge: false,
                   child: const Icon(
                     Icons.message_rounded,
+                    color: Colors.white,
+                    size: 33,
                   )),
             ),
             FloatingNavbarItem(icon: Icons.person, title: 'My Page'),
