@@ -28,7 +28,7 @@ class UserDetailsPage extends ConsumerStatefulWidget {
   ConsumerState<UserDetailsPage> createState() => _UserDetailsPageState();
 }
 
-enum UserType { student, content }
+enum UserType { student, content, Others }
 
 class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
   late TextEditingController _about_controller;
@@ -180,8 +180,8 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
                                         ),
                                         filterQuality: FilterQuality.low,
                                         fit: BoxFit.contain,
-                                        width: 40,
-                                        height: 40,
+                                        width: 30,
+                                        height: 30,
                                       )
                                     : const FaIcon(FontAwesomeIcons.camera),
                           ),
@@ -239,6 +239,30 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
                           }),
                           title: Text(
                             "Student".toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 8,
+                              fontWeight: userType == UserType.student
+                                  ? FontWeight.w800
+                                  : FontWeight.normal,
+                              color: userType == UserType.student
+                                  ? Colors.amber[900]
+                                  : Colors.black,
+                            ),
+                          ),
+                          activeColor: Colors.amber.shade900,
+                        ),
+                      ),
+                      Expanded(
+                        child: RadioListTile(
+                          value: UserType.Others,
+                          groupValue: userType,
+                          onChanged: ((UserType? value) {
+                            setState(() {
+                              userType = value;
+                            });
+                          }),
+                          title: Text(
+                            "Others".toUpperCase(),
                             style: TextStyle(
                               fontSize: 8,
                               fontWeight: userType == UserType.student
@@ -330,6 +354,11 @@ class _UserDetailsPageState extends ConsumerState<UserDetailsPage> {
                       if (userType == UserType.student) {
                         setState(() {
                           usertype = 'Student';
+                        });
+                      }
+                      if (userType == UserType.Others) {
+                        setState(() {
+                          usertype = 'others';
                         });
                       } else {
                         setState(() {

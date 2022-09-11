@@ -37,6 +37,7 @@ class MyApp extends ConsumerWidget {
       darkTheme: CustomTheme.darkTheme, //4
       themeMode: currentTheme.currentTheme,
       home: checkAutState != null ? MainAppPage() : AuthPage(),
+      // home: UserDetailsPage(),
     );
   }
 }

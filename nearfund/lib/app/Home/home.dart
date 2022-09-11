@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nearfund/app/Home/home_feed.dart';
 import 'package:nearfund/app/Student/StudentFeed.dart';
 import 'package:nearfund/app/contentCreators/creators_feed.dart';
+import 'package:nearfund/app/others/others_feed.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -35,7 +36,7 @@ class _HomePageState extends ConsumerState<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    TabController tabcontroller = TabController(length: 3, vsync: this);
+    TabController tabcontroller = TabController(length: 4, vsync: this);
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -47,6 +48,14 @@ class _HomePageState extends ConsumerState<HomePage>
             ),
           ),
           elevation: 0,
+          actions: [
+            Container(
+              child: IconButton(
+                icon: Icon(Icons.search_rounded),
+                onPressed: () {},
+              ),
+            )
+          ],
           backgroundColor: Colors.white,
           bottom: TabBar(
             controller: tabcontroller,
@@ -67,14 +76,20 @@ class _HomePageState extends ConsumerState<HomePage>
               Tab(text: 'Creators'),
               Tab(
                 text: 'Student',
+              ),
+              Tab(
+                text: 'Others',
               )
             ],
           ),
         ),
         body: SafeArea(
-          child: TabBarView(
-              controller: tabcontroller,
-              children: [HomeFeed(), CreatorsFeed(), StudentFeed()]),
+          child: TabBarView(controller: tabcontroller, children: [
+            HomeFeed(),
+            CreatorsFeed(),
+            StudentFeed(),
+            OthersFeed()
+          ]),
         ));
   }
 }

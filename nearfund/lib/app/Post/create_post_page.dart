@@ -10,6 +10,10 @@ class CreatePostPage extends StatefulWidget {
 class _CreatePostPageState extends State<CreatePostPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: ListView(
+        children: [],
+      ),
+    );
   }
 }
