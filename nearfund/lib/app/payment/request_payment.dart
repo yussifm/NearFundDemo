@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class RequestPayment extends StatefulWidget {
-  RequestPayment({Key? key}) : super(key: key);
+class RequestToPayment extends ConsumerStatefulWidget {
+  RequestToPayment({Key? key}) : super(key: key);
 
   @override
-  State<RequestPayment> createState() => _RequestPaymentState();
+  ConsumerState<RequestToPayment> createState() => _RequestPaymentState();
 }
 
-class _RequestPaymentState extends State<RequestPayment> {
+class _RequestPaymentState extends ConsumerState<RequestToPayment> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("PayMent"),
+      ),
+      body: Column(
+        children: [],
+      ),
+    );
   }
 }
