@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nearfund/app/profile/my_page.dart';
+import 'package:nearfund/app/settings/Setting_page.dart';
 
 import 'widgets/profile_statsWidget.dart';
 
@@ -84,7 +85,10 @@ class _MainProfilePageState extends State<MainProfilePage> {
                 Expanded(
                   flex: 1,
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SettingPage()));
+                      },
                       icon: const Icon(Icons.settings_rounded)),
                 )
               ],

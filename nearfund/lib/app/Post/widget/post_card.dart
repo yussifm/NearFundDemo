@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nearfund/app/payment/request_payment.dart';
 
 class PostCard extends ConsumerStatefulWidget {
   PostCard({Key? key}) : super(key: key);
@@ -96,7 +97,10 @@ class _PostCardState extends ConsumerState<PostCard> {
                       )),
                       Expanded(
                           child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: ((context) => RequestToPayment())));
+                        },
                         child: Container(
                           alignment: Alignment.center,
                           width: double.maxFinite,

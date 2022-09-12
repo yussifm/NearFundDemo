@@ -8,6 +8,9 @@ import 'package:nearfund/app/Auth/login_page.dart';
 import 'package:nearfund/app/UserDetils/userdetails_page.dart';
 import 'package:nearfund/app/loading/loading_page.dart';
 import 'package:nearfund/app/mainPage/main_page.dart';
+import 'package:nearfund/app/payment/request_payment.dart';
+import 'package:nearfund/app/payment/withdraw_earn.dart';
+import 'package:nearfund/app/settings/Setting_page.dart';
 import 'package:nearfund/firebase_options.dart';
 import 'package:nearfund/services/authService.dart';
 import 'package:nearfund/theme/config.dart';
@@ -37,7 +40,7 @@ class MyApp extends ConsumerWidget {
       darkTheme: CustomTheme.darkTheme, //4
       themeMode: currentTheme.currentTheme,
       // home: checkAutState != null ? MainAppPage() : AuthPage(),
-      home: UserDetailsPage(),
+      home: SettingPage(),
     );
   }
 }

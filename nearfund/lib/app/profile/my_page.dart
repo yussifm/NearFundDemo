@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../payment/request_payment.dart';
 import 'widgets/profile_action_ICBtn.dart';
 import 'widgets/profile_statsWidget.dart';
 
@@ -12,6 +13,7 @@ class MyPageProfile extends StatefulWidget {
 }
 
 class _MyPageProfileState extends State<MyPageProfile> {
+  bool isUser = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,26 +110,34 @@ class _MyPageProfileState extends State<MyPageProfile> {
                                           number: '0',
                                         ),
                                       ),
-                                      Expanded(
-                                          child: GestureDetector(
-                                        onTap: () {},
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          width: double.maxFinite,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                              color: Colors.deepPurple[200],
-                                              borderRadius:
-                                                  BorderRadius.circular(50)),
-                                          child: Text(
-                                            'Support'.toUpperCase(),
-                                            style: const TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w700),
+                                      Visibility(
+                                        visible: !isUser,
+                                        child: Expanded(
+                                            child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: ((context) =>
+                                                        RequestToPayment())));
+                                          },
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            width: double.maxFinite,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                                color: Colors.deepPurple[200],
+                                                borderRadius:
+                                                    BorderRadius.circular(50)),
+                                            child: Text(
+                                              'Support'.toUpperCase(),
+                                              style: const TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w700),
+                                            ),
                                           ),
-                                        ),
-                                      ))
+                                        )),
+                                      )
                                     ],
                                   ),
                                 ),
