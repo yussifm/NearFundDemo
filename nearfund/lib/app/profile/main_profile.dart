@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nearfund/app/profile/my_page.dart';
 
+import 'widgets/profile_statsWidget.dart';
+
 class MainProfilePage extends StatefulWidget {
   MainProfilePage({Key? key}) : super(key: key);
 
@@ -42,22 +44,23 @@ class _MainProfilePageState extends State<MainProfilePage> {
                         children: [
                           //image
                           Container(
+                            width: 50,
+                            height: 50,
+                            margin: const EdgeInsets.only(right: 10, top: 15),
+                            padding: const EdgeInsets.all(1),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.deepPurple[50]),
+                            child: const Image(
+                              image: AssetImage(
+                                'assets/images/NearFund_Logo.png',
+                              ),
                               width: 50,
                               height: 50,
-                              margin: const EdgeInsets.only(right: 10, top: 15),
-                              padding: const EdgeInsets.all(1),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.deepPurple[50]),
-                              child: const Image(
-                                image: AssetImage(
-                                  'assets/images/NearFund_Logo.png',
-                                ),
-                                width: 50,
-                                height: 50,
-                                fit: BoxFit.contain,
-                                filterQuality: FilterQuality.high,
-                              )),
+                              fit: BoxFit.contain,
+                              filterQuality: FilterQuality.high,
+                            ),
+                          ),
 
                           //Text
                           Column(
@@ -216,29 +219,5 @@ class _MainProfilePageState extends State<MainProfilePage> {
         ],
       )),
     );
-  }
-}
-
-class ProfileStatsWidget extends StatelessWidget {
-  const ProfileStatsWidget({Key? key, required this.name, required this.number})
-      : super(key: key);
-
-  final String number;
-  final String name;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      Expanded(
-          child: Text(number,
-              style:
-                  const TextStyle(fontWeight: FontWeight.w600, fontSize: 15))),
-      Expanded(
-        child: Text(
-          name.toUpperCase(),
-          style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
-        ),
-      )
-    ]);
   }
 }
