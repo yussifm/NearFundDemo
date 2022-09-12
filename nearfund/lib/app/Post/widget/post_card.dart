@@ -102,12 +102,12 @@ class _PostCardState extends ConsumerState<PostCard> {
                           width: double.maxFinite,
                           height: 20,
                           decoration: BoxDecoration(
-                              color: Colors.green,
+                              color: Colors.deepPurple[200],
                               borderRadius: BorderRadius.circular(50)),
                           child: Text(
                             'Support'.toUpperCase(),
                             style: const TextStyle(
-                                fontSize: 14,
+                                fontSize: 12,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700),
                           ),

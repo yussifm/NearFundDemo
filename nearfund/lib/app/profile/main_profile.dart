@@ -48,7 +48,7 @@ class _MainProfilePageState extends State<MainProfilePage> {
                               padding: const EdgeInsets.all(1),
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Colors.blue.withOpacity(0.2)),
+                                  color: Colors.deepPurple[50]),
                               child: const Image(
                                 image: AssetImage(
                                   'assets/images/NearFund_Logo.png',
@@ -127,13 +127,13 @@ class _MainProfilePageState extends State<MainProfilePage> {
 
                   //Divider
 
-                  const Padding(
-                    padding:
-                        EdgeInsets.only(top: 5, left: 20, right: 20, bottom: 5),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 5, left: 20, right: 20, bottom: 5),
                     child: Divider(
                       height: 2,
                       thickness: 2,
-                      color: Colors.blue,
+                      color: Colors.deepPurple[200],
                     ),
                   ),
 
@@ -144,16 +144,71 @@ class _MainProfilePageState extends State<MainProfilePage> {
                     width: double.infinity,
                     height: 200,
                     margin: const EdgeInsets.only(left: 15, right: 15),
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(
+                        top: 20, left: 20, right: 20, bottom: 10),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white),
                     child: Column(
-                      children: [],
+                      children: [
+                        const Expanded(child: Text('My Earnings(GHS)')),
+                        const Expanded(
+                          child: const Text('10000.00'),
+                        ),
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: InkWell(
+                              radius: 1,
+                              onTap: () {},
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 50,
+                                width: 100,
+                                margin: const EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.deepPurple[200]),
+                                child: Text(
+                                  'Withdraw',
+                                  style: TextStyle(
+                                      fontSize: 15, color: Colors.grey[600]),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
 
+                  const SizedBox(
+                    height: 10,
+                  ),
                   //Recent Support
+                  Expanded(
+                      child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'Recent Donations',
+                            style: TextStyle(
+                                fontSize: 15, color: Colors.grey[400]),
+                          ),
+                        ),
+                        Expanded(
+                            flex: 3,
+                            child: ListView(
+                              children: [],
+                            ))
+                      ],
+                    ),
+                  ))
                 ],
               ),
             ),

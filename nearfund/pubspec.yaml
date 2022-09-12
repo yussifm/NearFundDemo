@@ -66,6 +66,7 @@ dependencies:
   floating_bottom_navigation_bar: ^1.5.2
   flutter_floating_bottom_bar: ^1.1.0
   bubble_tab_indicator: ^0.1.6
+  modal_bottom_sheet: ^2.1.2
   
 
 
