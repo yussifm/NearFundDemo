@@ -66,7 +66,7 @@ class _MainProfilePageState extends State<MainProfilePage> {
                             children: const [
                               Text("The Coded"),
                               Text(
-                                'View my page',
+                                'View my profile',
                                 style: TextStyle(fontSize: 10),
                               )
                             ],
