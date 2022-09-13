@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nearfund/app/profile/my_page.dart';
 import 'package:nearfund/app/settings/Setting_page.dart';
 
+import '../payment/withdraw_earn.dart';
 import 'widgets/profile_statsWidget.dart';
 
 class MainProfilePage extends StatefulWidget {
@@ -167,7 +168,11 @@ class _MainProfilePageState extends State<MainProfilePage> {
                             alignment: Alignment.bottomRight,
                             child: InkWell(
                               radius: 1,
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => WithdrawEarn(),
+                                ));
+                              },
                               borderRadius: BorderRadius.circular(20),
                               child: Container(
                                 alignment: Alignment.center,

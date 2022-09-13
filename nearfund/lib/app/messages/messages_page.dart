@@ -17,7 +17,7 @@ class _MessagePageState extends State<MessagePage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -33,14 +33,9 @@ class _MessagePageState extends State<MessagePage> {
                         FontAwesomeIcons.angleLeft,
                         size: 20.0,
                       )),
-                  Text(
-                    "Calls",
-                    style: TextStyle(
-                        color: Colors.amber[800], fontWeight: FontWeight.w600),
-                  ),
                 ],
               ),
-              Text(
+              const Text(
                 "Chats",
                 style: TextStyle(
                     color: Colors.black,
@@ -56,7 +51,7 @@ class _MessagePageState extends State<MessagePage> {
                   ))
             ],
           ),
-          Divider(
+          const Divider(
             thickness: 1.5,
           ),
           Expanded(
@@ -67,35 +62,23 @@ class _MessagePageState extends State<MessagePage> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[300],
-                    borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                    borderRadius: const BorderRadius.all(Radius.circular(40.0)),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.shade600,
-                        offset: Offset(3.0, 4.0),
+                        color: Colors.grey.shade300,
+                        offset: const Offset(3.0, 4.0),
                         blurRadius: 5.0,
                         spreadRadius: 0.5,
                       ),
-                      BoxShadow(
+                      const BoxShadow(
                         color: Colors.white,
                         offset: Offset(-4.0, -4.0),
                         blurRadius: 5.0,
                         spreadRadius: 0.5,
                       ),
                     ],
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Colors.grey.shade500,
-                        Colors.grey.shade300,
-                        Colors.grey.shade200,
-                        Colors.grey.shade100,
-                        Colors.grey.shade300,
-                        Colors.grey.shade500
-                      ],
-                    ),
                   ),
-                  child: TextField(
+                  child: const TextField(
                     decoration: InputDecoration(
                       hintText: 'Search',
                       border: OutlineInputBorder(
@@ -132,29 +115,17 @@ class _MessagePageState extends State<MessagePage> {
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.shade600,
-                                  offset: Offset(4.0, 7.0),
+                                  offset: const Offset(4.0, 7.0),
                                   blurRadius: 10.0,
                                   spreadRadius: 0.5,
                                 ),
-                                BoxShadow(
+                                const BoxShadow(
                                   color: Colors.white,
                                   offset: Offset(-4.0, -4.0),
                                   blurRadius: 15.0,
                                   spreadRadius: 1.0,
                                 )
                               ],
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Colors.grey.shade500,
-                                  Colors.grey.shade300,
-                                  Colors.grey.shade200,
-                                  Colors.grey.shade100,
-                                  Colors.grey.shade300,
-                                  Colors.grey.shade500
-                                ],
-                              ),
                             ),
                             child: Center(child: Text(name[0].toUpperCase())),
                           )),
@@ -170,7 +141,7 @@ class _MessagePageState extends State<MessagePage> {
                                     trailing: Text(timeM),
                                   ),
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Divider(
                                     thickness: 1.4,
                                   ),
