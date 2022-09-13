@@ -24,17 +24,7 @@ class _MessagePageState extends State<MessagePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  IconButton(
-                      color: Colors.amber[800],
-                      onPressed: () {},
-                      icon: const FaIcon(
-                        FontAwesomeIcons.angleLeft,
-                        size: 20.0,
-                      )),
-                ],
-              ),
+             
               const Text(
                 "Chats",
                 style: TextStyle(
