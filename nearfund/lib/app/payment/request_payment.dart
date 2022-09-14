@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nearfund/app/Auth/widgets/auth_btn.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../widgets/general_textfiled.dart';
@@ -125,25 +126,76 @@ class _RequestPaymentState extends ConsumerState<RequestToPayment> {
     var ref = await createuser();
     var apikey = await getUserAPIKey(ref);
     var Token = await getToken(ref, apikey);
+    var request = await requestToPay(Token, ref, amount);
   }
 
-  requestToPay() async {}
+  requestToPay(String token, String ref, String amount) async {
+    var headers = {
+      'X-Reference-Id': '$ref',
+      'X-Target-Environment': 'sandbox',
+      'Ocp-Apim-Subscription-Key': '02fd569a483a47788fce22a00fb44101',
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json'
+    };
+    var request = http.Request(
+        'POST',
+        Uri.parse(
+            'https://sandbox.momodeveloper.mtn.com/collection/v1_0/requesttopay'));
+    request.body = json.encode({
+      "amount": "$amount",
+      "currency": "EUR",
+      "externalId": "$ref",
+      "payer": {"partyIdType": "msisdn", "partyId": "46733123454"},
+      "payerMessage": "Test payment 2",
+      "payeeNote": "Test payment 2"
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 202) {
+      print(await response.stream.bytesToString());
+      Alert(
+        context: context,
+        type: AlertType.success,
+        title: "Success",
+        desc: "You have approved GHS $amount via MTM MoMo",
+        buttons: [
+          DialogButton(
+            child: Text(
+              "Okay",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () => Navigator.pop(context),
+            width: 120,
+          )
+        ],
+      ).show();
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
   getToken(String userid, String userkey) async {
     String key = base64Encode(utf8.encode('$userid:$userkey'));
     var headers = {
       'Ocp-Apim-Subscription-Key': '$ksubscriptionKey',
       'Authorization': 'Basic $key'
     };
-    var request = http.Request('POST',
-        Uri.parse('https://sandbox.momodeveloper.mtn.com/collection/token/'));
+    /*var request = http.Request('POST',
+        Uri.parse('https://sandbox.momodeveloper.mtn.com/collection/token/'));*/
 
-    request.headers.addAll(headers);
+    var url =
+        Uri.parse('https://sandbox.momodeveloper.mtn.com/collection/token/');
+    var response = await http.post(url, headers: headers);
+    //request.headers.addAll(headers);
 
-    http.StreamedResponse response = await request.send();
+    // var response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-      var data2 = jsonDecode(await response.stream.bytesToString());
+      print(response.body);
+      var data2 = jsonDecode(await response.body);
+      print(data2['access_token']);
       return data2['access_token'];
     } else {
       print(response.reasonPhrase);
