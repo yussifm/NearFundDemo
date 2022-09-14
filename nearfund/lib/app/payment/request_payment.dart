@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nearfund/app/Auth/widgets/auth_btn.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:uuid/uuid.dart';
 
 import '../../widgets/general_textfiled.dart';
 import 'widget/text_caption.dart';
@@ -16,6 +19,10 @@ class RequestToPayment extends ConsumerStatefulWidget {
 class _RequestPaymentState extends ConsumerState<RequestToPayment> {
   late TextEditingController _amount_controller;
   final _userformKey = GlobalKey<FormState>();
+  var uuid = Uuid();
+  static const kuserID = '';
+  late String kuuid;
+  static const ksubscriptionKey = '02fd569a483a47788fce22a00fb44101';
 
   @override
   void initState() {
@@ -31,6 +38,7 @@ class _RequestPaymentState extends ConsumerState<RequestToPayment> {
 
   @override
   Widget build(BuildContext context) {
+    kuuid = uuid.v4();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -86,7 +94,9 @@ class _RequestPaymentState extends ConsumerState<RequestToPayment> {
           // Button
           AuthBtn(
             btnName: 'Request',
-            onPress: () {},
+            onPress: () {
+              requestMTN(_amount_controller.text);
+            },
             width: 200,
           ),
           const SizedBox(
@@ -108,5 +118,82 @@ class _RequestPaymentState extends ConsumerState<RequestToPayment> {
         ],
       ),
     );
+  }
+
+  requestMTN(String amount) async {
+    print(amount);
+    var ref = await createuser();
+    var apikey = await getUserAPIKey(ref);
+    var Token = await getToken(ref, apikey);
+  }
+
+  requestToPay() async {}
+  getToken(String userid, String userkey) async {
+    String key = base64Encode(utf8.encode('$userid:$userkey'));
+    var headers = {
+      'Ocp-Apim-Subscription-Key': '$ksubscriptionKey',
+      'Authorization': 'Basic $key'
+    };
+    var request = http.Request('POST',
+        Uri.parse('https://sandbox.momodeveloper.mtn.com/collection/token/'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      var data2 = jsonDecode(await response.stream.bytesToString());
+      return data2['access_token'];
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
+  getUserAPIKey(String key) async {
+    var headers = {'Ocp-Apim-Subscription-Key': '$ksubscriptionKey'};
+    var request = http.Request(
+        'POST',
+        Uri.parse(
+            'https://sandbox.momodeveloper.mtn.com/v1_0/apiuser/$key/apikey'));
+    request.body = '';
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 201) {
+      var data = jsonDecode(await response.stream.bytesToString());
+      print(data['apiKey']);
+      return data['apiKey'];
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
+  getuid() {
+    return uuid.v4();
+  }
+
+  createuser() async {
+    var headers = {
+      'Content-Type': 'application/json',
+      'Ocp-Apim-Subscription-Key': '$ksubscriptionKey',
+      'X-Reference-Id': '$kuuid'
+    };
+    var request = http.Request('POST',
+        Uri.parse('https://sandbox.momodeveloper.mtn.com/v1_0/apiuser'));
+    request.body = json.encode(
+        {"providerCallbackHost": "callbacks-do-not-work-in-sandbox.com"});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 201) {
+      print('${await response.stream.bytesToString()} $kuuid');
+      print(kuuid);
+      return kuuid;
+    } else {
+      print(response.reasonPhrase);
+    }
   }
 }
